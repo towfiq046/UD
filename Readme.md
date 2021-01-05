@@ -30,7 +30,7 @@ Applications required to run this app:
 * MySQL database and localserver (I used laragon)(<https://sourceforge.net/projects/laragon/files/releases/4.0/laragon-full.exe/download>)
 
 * Python (<https://www.python.org/downloads/>)
-  * Note: Check the `Add python 3.9 to PATH` box
+  * Note: Check the `Add python 3.9 to PATH` box on the installation stage
 
 ## Run the project
 
