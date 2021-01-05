@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} Update Child {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-8 offset-sm-2">
+        <h1 class="display-3">Update Child</h1>
+        <div>
+            <form method="post" action="{{ url_for('update_child', child_id = child.id) }}">
+                {{ child_form.csrf_token }}
+                <div class="form-group">{{ child_form.first_name.label }}: {{ child_form.first_name(class="form-control", value=child.first_name) }}</div>
+                {% if child_form.first_name.errors %}
+                    <ul style="color: red;">{% for error in child_form.first_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+
+                <div class="form-group">{{ child_form.last_name.label }}: {{ child_form.last_name(class="form-control", value=child.last_name) }}</div>
+                {% if child_form.last_name.errors %}
+                    <ul style="color: red;">{% for error in child_form.last_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+                <button type="submit" class="btn btn-primary mt-3">
+                    Update
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

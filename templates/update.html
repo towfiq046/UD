@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %} Update {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-8 offset-sm-2">
+        <h1 class="display-3">Update Parent</h1>
+        <div>
+            <form method="post" action="{{ url_for('update', parent_id = parent.id) }}">
+                {{ parent_form.csrf_token }}
+                <div class="form-group">{{ parent_form.first_name.label }}: {{ parent_form.first_name(class="form-control", value=parent.first_name) }}</div>
+                {% if parent_form.first_name.errors %}
+                    <ul style="color: red;">{% for error in parent_form.first_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+
+                <div class="form-group">{{ parent_form.last_name.label }}: {{ parent_form.last_name(class="form-control", value=parent.last_name) }}</div>
+                {% if parent_form.last_name.errors %}
+                    <ul style="color: red;">{% for error in parent_form.last_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+
+                <div class="form-group">{{ parent_form.street.label }}: {{ parent_form.street(class="form-control", value=parent.street) }}</div>
+                {% if parent_form.street.errors %}
+                    <ul style="color: red;">{% for error in parent_form.street.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+
+                <div class="form-group">{{ parent_form.city.label }}: {{ parent_form.city(class="form-control", value=parent.city) }}</div>
+                {% if parent_form.city.errors %}
+                    <ul style="color: red;">{% for error in parent_form.city.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+
+                <div class="form-group">{{ parent_form.state.label }}: {{ parent_form.state(class="form-control", value=parent.state) }}</div>
+                {% if parent_form.state.errors %}
+                    <ul style="color: red;">{% for error in parent_form.state.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+
+                <div class="form-group">{{ parent_form.zip_code.label }}: {{ parent_form.zip_code(class="form-control", value=parent.zip_code) }}</div>
+                {% if parent_form.zip_code.errors %}
+                    <ul style="color: red;">{% for error in parent_form.zip_code.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+
+                <button type="submit" class="btn btn-primary mt-3">
+                    Update
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

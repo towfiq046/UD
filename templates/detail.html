@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %} Detail {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="display-3 mb-5">User Detail</h1>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div>
+                <div class="form-group">
+                    <label class="h5">First Name:</label>
+                    <label>{{ parent.first_name }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="h5">Last Name:</label>
+                    <label>{{ parent.last_name }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="h5">Street:</label>
+                    <label>{{ parent.street }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="h5">City:</label>
+                    <label>{{ parent.city }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="h5">state:</label>
+                    <label>{{ parent.state }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="h5">ZIP:</label>
+                    <label>{{ parent.zip_code }}</label>
+                </div>
+                {% for child in children %}
+                <h4 class="mt-5">Child Info</h4>
+                <div class="form-group">
+                    <label class="h5">First Name:</label>
+                    <label>{{ child.first_name }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="h5">Last Name:</label>
+                    <label>{{ child.last_name }}</label>
+                </div>
+                <a href="{{ url_for('update_child', child_id = child.id) }}" class="btn btn-primary mb-5 mr-3">Update Child</a>
+                <a href="{{ url_for('delete_child', child_id = child.id) }}" class="btn btn-danger mb-5">Delete Child</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

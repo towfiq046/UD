@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %} Create Child {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-8 offset-sm-2">
+        <h1 class="display-3">New Child</h1>
+        <div>
+            <form method="post" action="{{url_for('create_child')}}">
+                {{ child_form.csrf_token }}
+                <div class="form-group">
+                    <select class="custom-select" name="parent_id">
+                        {% if parents is not none %}
+                        {% for parent in parents %}
+                            <option value="{{ parent.id }}">{{ parent.first_name }} {{ parent.last_name }}</option>
+                        {% endfor %}
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="form-group">{{ child_form.first_name.label }}: {{ child_form.first_name(class="form-control") }}</div>
+                {% if child_form.first_name.errors %}
+                    <ul style="color: red;">{% for error in child_form.first_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+
+                <div class="form-group">{{ child_form.last_name.label }}: {{ child_form.last_name(class="form-control") }}</div>
+                {% if child_form.last_name.errors %}
+                    <ul style="color: red;">{% for error in child_form.last_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+                <button type="submit" class="btn btn-primary mt-3">
+                    Create
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

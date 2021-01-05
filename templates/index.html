@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="display-3">Users</h1>
+            <div class="btn-group mb-3">
+                <a href="{{url_for('create')}}" class="btn btn-primary mr-3">New Parent</a>
+                <a href="{{url_for('create_child')}}" class="btn btn-primary">New Child</a>
+            </div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <table class="table table-striped ">
+                <thead class="table-dark">
+                    <tr>
+                        <td><b>ID</b></td>
+                        <td><b>First Name</b></td>
+                        <td><b>Last Name</b></td>
+                        <td><b>Street</b></td>
+                        <td><b>City</b></td>
+                        <td><b>State</b></td>
+                        <td><b>ZIP</b></td>
+                        <td colspan="3" class="text-center"> <b>Actions</b> </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for parent in parents %}
+                    <tr>
+                        <td>{{ parent.id }}</td>
+                        <td>{{ parent.first_name }}</td>
+                        <td>{{ parent.last_name }}</td>
+                        <td>{{ parent.street }}</td>
+                        <td>{{ parent.city }}</td>
+                        <td>{{ parent.state }}</td>
+                        <td>{{ parent.zip_code }}</td>
+                        <td>
+                            <a href="{{url_for('update', parent_id = parent.id)}}" class="btn btn-primary">Update</a>
+                        </td>
+                        <td>
+                            <a href="{{url_for('detail', parent_id = parent.id)}}" class="btn btn-info">Detail</a>
+                        </td>
+                        <td>
+                            <a href="{{url_for('delete', parent_id = parent.id)}}" class="btn btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
